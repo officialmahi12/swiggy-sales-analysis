@@ -1,5 +1,4 @@
-# swiggy-sales-analysis
-# Swiggy Sales Analysis Dashboard
+# Swiggy Sales Analysis & Dashboard
 
 ![Dashboard Preview](swiggy_dashboard.png)
 
