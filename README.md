@@ -107,3 +107,54 @@ that quality of service did not slip when demand slowed down.
 
 These are the kinds of things the raw numbers do not tell you
 until you actually sit with the data.
+
+
+---
+
+## 🗄️ SQL Analysis (Star Schema + KPI Queries)
+
+While the Python and Excel work above focuses on exploration and visualization,
+I also rebuilt this entire analysis in SQL Server from scratch — covering data
+cleaning, schema design, and business KPI development.
+
+### What I Built in SQL
+
+**Data Cleaning**
+- Null checks across all columns
+- Blank/empty string detection
+- Duplicate identification and removal using ROW_NUMBER()
+
+**Star Schema Design**
+Built a proper dimensional model with 1 fact table and 5 dimension tables:
+
+| Table | Description |
+|---|---|
+| `fact_swiggy_orders` | Core transactional table with price, rating, foreign keys |
+| `dim_date` | Year, Month, Quarter, Week, Day breakdown |
+| `dim_location` | State → City → Location hierarchy |
+| `dim_restaurant` | Restaurant master |
+| `dim_category` | Food category master |
+| `dim_dish` | Dish name master |
+
+**KPIs Developed**
+
+| KPI | Type |
+|---|---|
+| Total Orders & Revenue | Basic |
+| Monthly / Quarterly / YoY Trends | Date-Based |
+| Day-of-Week Order Patterns | Date-Based |
+| Top 10 Cities by Volume | Location |
+| Revenue Share by State | Location |
+| Top Restaurants & Dishes | Food Performance |
+| Cuisine Orders + Avg Rating | Food Performance |
+| Customer Spend Buckets (Under 100 → 500+) | Spending |
+| Ratings Distribution (1–5) | Ratings |
+
+### SQL Files
+- `01_data_cleaning.sql` — Null checks, duplicates, blank detection
+- `02_schema_creation.sql` — Fact + dimension table creation
+- `03_data_insertion.sql` — Populating all tables from raw data
+- `04_kpi_queries.sql` — All business KPI queries
+
+### Tools Used
+SQL Server, T-SQL, Window Functions, CTEs, Star Schema Design
